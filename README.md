@@ -9,21 +9,20 @@ This GitHub repository contains the source code for the EBOD WordPress plugin, w
 
 1. Download the latest release `ebod.zip` file from the [Releases](https://github.com/bod-digital/ebod-wordpress-plugin/releases/latest) page.
 
-![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/9bd8996f-53bc-42a0-b28d-9702bc248159)
+![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/ebfad928-2aeb-44d5-9b90-a58efc027965)
 
 2. Upload the `ebod.zip` file to your WordPress site.
 
-![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/306a8c7c-b3a3-4662-bbf6-27c0ca16b74c)
-
-![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/996cc2de-7aad-4d71-9a09-c045f06bf3b5)
+![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/161f111b-a5ab-49ac-818b-3a74a29b4e68)
 
 3. Activate the EBOD plugin from the WordPress admin dashboard.
 
-![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/55243db1-019d-4a80-b3ef-569efa69fa9f)
+![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/8598db53-19b9-4aba-ad32-35c80a4a89dd)
 
 4. Configure the plugin settings by navigating to `EBOD Tracking` in the WordPress admin menu.
 
-![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/1bbc5802-e602-46cb-a484-3ff87856adfa)
+![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/e15d7e64-f5c4-4419-a294-7be088c42df6)
+
 
 ## Usage
 

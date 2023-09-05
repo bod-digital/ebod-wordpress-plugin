@@ -10,29 +10,6 @@
  * @subpackage Ebod/admin
  */
 
-if( ! function_exists('ebod_admin_page')) {
-	function ebod_admin_page() {
-		$ebodToken = get_user_meta(EBOD_UID, 'ebod-token', true);
-		if ( $ebodToken === false ) {
-			$ebodToken = '';
-		}
-		
-		$ebodAuth = get_user_meta(EBOD_UID, 'ebod-auth', true);
-		if ( $ebodAuth === false ) {
-			$ebodAuth = '';
-		}
-
-		$ebodAuthCreated = get_user_meta(EBOD_UID, 'ebod-auth-created', true);
-		if ( $ebodAuthCreated === false ) {
-			$ebodAuthCreated = time();
-		}
-			
-		$isWoocommerceActive = is_woocommerce_activated();
-				
-		include('partials/ebod-admin-display.php');
-	}
-}
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -124,54 +101,113 @@ class Ebod_Admin {
 	}
 
 	public function ebod_menu() {
-		add_menu_page(
-			'EBOD', 
+		add_options_page( 
+			'EBOD Tracking', 
 			'EBOD Tracking', 
 			'manage_options', 
 			'ebod', 
-			'ebod_admin_page', 
-			'dashicons-admin-generic'
+			'ebod_options_page' 
 		);			
 	}
-	
-	public function ebod_submit() {
-		if( isset( $_POST['ebod-custom-message'] ) &&  wp_verify_nonce( $_POST['ebod-custom-message'], 'ebod-settings-save' ) ) {
-				
-			$checkToken = get_user_meta(EBOD_UID, 'ebod-token', true);
-			if($checkToken !== false) {
-				update_user_meta(EBOD_UID, 'ebod-token', trim(strip_tags($_POST['ebod-token'])));
-			} else {
-				add_user_meta(EBOD_UID, 'ebod-token', trim(strip_tags($_POST['ebod-token'])), true);
-			}
 
-			$checkAuth = get_user_meta(EBOD_UID, 'ebod-auth', true);
-			if($checkAuth !== false) {
-				update_user_meta(EBOD_UID, 'ebod-auth', trim(strip_tags($_POST['ebod-auth'])));
-			} else {
-				add_user_meta(EBOD_UID, 'ebod-auth', trim(strip_tags($_POST['ebod-auth'])), true);
-				add_user_meta(EBOD_UID, 'ebod-auth-created', time(), true);
-			}
+	public function ebod_admin_settings_init() {
+		register_setting('ebod', 'ebod_settings');
 
-			if($checkAuth && $checkAuth != trim($_POST['ebod-auth'])) {
-				update_user_meta(EBOD_UID, 'ebod-auth-created', time(), true);
-			}
-			
-			wp_redirect( 'admin.php?success_notice=1&page=' . $this->plugin_name );
-			exit;
-			
-		} else {
-			wp_die(__( 'Invalid nonce specified', $this->plugin_name ), __( 'Error', $this->plugin_name ), array(
-				'response' 	=> 403,
-				'back_link' => 'admin.php?page=' . $this->plugin_name,
-			));
-		}
+		add_settings_section(
+			'ebod_settings_section',
+			'EBOD Tracking Configuration', 
+			'ebod_settings_section_callback',
+			'ebod'
+		);
+
+		add_settings_field(
+			'ebod_apitoken_field',
+			'Authorization API Token', 
+			'ebod_apitoken_field_callback',
+			'ebod',
+			'ebod_settings_section'
+		);
 		
-	}
-
-	public function ebod_admin_notice() {
-		if (! empty($_GET['success_notice'])) {
-			echo '<div class="notice notice-success is-dismissible"><p>Successfully saved.</p></div>';
-		}
+		add_settings_field(
+			'ebod_webtoken_field',
+			'Website Token', 
+			'ebod_webtoken_field_callback',
+			'ebod',
+			'ebod_settings_section'
+		);
+		
+		add_settings_field(
+			'ebod_timecreated_field',
+			'', 
+			'ebod_timecreated_field_callback',
+			'ebod',
+			'ebod_settings_section'
+		);
 	}
 
 }
+
+function ebod_settings_section_callback() {
+	?>
+	<p>
+		Track easily the orders on your webpage and the user actions!<br>
+		Plugin info at <a href="https://app.bod.digital/merchant/login/" target="_blank">https://app.bod.digital/merchant/login/</a>.
+	</p>
+	<?php
+}
+
+function ebod_timecreated_field_callback() {
+	$setting = get_option('ebod_settings');
+	?>
+	<input type="hidden" name="ebod_settings[ebod_timecreated_field]" value="<?php echo isset( $setting['ebod_timecreated_field'] ) ? esc_attr( $setting['ebod_timecreated_field'] ) : time(); ?>">
+	<?php
+}
+
+function ebod_apitoken_field_callback() {
+	$setting = get_option('ebod_settings');
+	?>
+    <fieldset>
+        <div id="cn_app_id">
+            <input type="text" name="ebod_settings[ebod_apitoken_field]" value="<?php echo isset( $setting['ebod_apitoken_field'] ) ? esc_attr( $setting['ebod_apitoken_field'] ) : ''; ?>">
+
+            <p class="description">Authorization token for authentication. You can find the token adminitration <a href="https://app.bod.digital/admin/tokens" target="_blank">here</a>.</p>
+                <p class="description" style="color:orange;">
+                <?php
+					if(isset($setting['ebod_timecreated_field'])) {
+						$timestamp = $setting['ebod_timecreated_field'];
+						$timestamp180DaysLater = $timestamp  + (EBOD_TOKEN_VALIDITY_DAYS * 24 * 60 * 60);
+						$remainingDays = floor(($timestamp180DaysLater - time()) / (24 * 60 * 60));
+
+						echo 'Your token will expire in '.$remainingDays.' days. ';
+
+						if ($currentTimestamp >= ( $timestamp180DaysLater - (30 * 24 * 60 * 60) )) {
+							echo 'Please <a href="https://app.bod.digital/admin/tokens" target="_blank">generate a new token</a> before it expires!';
+						}
+					}
+                ?>
+            </p> 
+        </div>
+    </fieldset>
+    <?php
+}
+
+function ebod_webtoken_field_callback() {
+	$setting = get_option('ebod_settings');
+	?>
+	<fieldset>
+        <div id="cn_app_id">
+			<input type="text" name="ebod_settings[ebod_webtoken_field]" value="<?php echo isset( $setting['ebod_webtoken_field'] ) ? esc_attr( $setting['ebod_webtoken_field'] ) : ''; ?>">                                            <p class="description">This steps is an essential prerequisite for identifying your customers and tracking their orders.</p>
+            <?php if(!is_woocommerce_activated()): ?>
+                <p class="description" style="color:red;">
+                    Before setup EBOD tracking, please install and activate Woocommerce plugin first! 
+                </p> <a href="https://mamsikovneruky.sk/wp-admin/plugin-install.php?s=woocommerce&tab=search&type=term">Install woocommerce now</a>
+            <?php endif; ?>
+        </div>
+    </fieldset>
+    <?php
+}
+
+function ebod_options_page(  ) {			
+	include('partials/ebod-admin-display.php');
+}
+

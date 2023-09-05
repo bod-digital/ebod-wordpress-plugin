@@ -14,14 +14,14 @@
  *
  * @wordpress-plugin
  * Plugin Name:       EBOD Tracking
- * Plugin URI:        https://bod.digital
+ * Plugin URI:        https://github.com/bod-digital/ebod-wordpress-plugin
  * Description:       EBOD Tracking for WooCommerce orders.
- * Version:           1.0.2
- * Author:            EBOD
+ * Version:           1.1.0
+ * Author:            ebodbot
  * Author URI:        https://bod.digital
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       ebod
+ * Text Domain:       eboddigital
  * Domain Path:       /languages
  */
 
@@ -35,8 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.2 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EBOD_VERSION', '1.0.2' );
-define( 'EBOD_UID', 1 );
+define( 'EBOD_VERSION', '1.1.0' );
 define( 'EBOD_API_VERSION', 'v1' );
 define( 'EBOD_TOKEN_VALIDITY_DAYS', '180' );
 define( 'EBOD_BASE_URL', 'https://e.bod.digital' );
@@ -92,9 +91,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-ebod.php';
  * @since    1.0.0
  */
 function run_ebod() {
-
 	$plugin = new Ebod();
 	$plugin->run();
-
 }
 run_ebod();

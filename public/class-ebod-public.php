@@ -101,20 +101,6 @@ class Ebod_Public {
 	}
 
 	/**
-	 * Get the auth token from user meta.
-	 */
-	private function getAuthToken() {
-		return get_user_meta(EBOD_UID, 'ebod-auth', true);
-	}
-
-	/**
-	 * Get the website token from user meta.
-	 */
-	private function getWebsiteToken() {
-		return get_user_meta(EBOD_UID, 'ebod-token', true);
-	}
-
-	/**
 	 * Call API request to EBOD tracking system.
 	 * 
 	 * @param integer $order_id
@@ -136,21 +122,19 @@ class Ebod_Public {
 		// Get the order status
 		$order_status = $order->get_status();
 
-		// Get the auth token 
-		$auth_token = $this->getAuthToken();
-
-		// Get the website token
-		$website_token = $this->getWebsiteToken();
-
-		// Check auth token and website token
-		if( $auth_token === false || $website_token === false ) {
+		$values = get_option('ebod_settings');
+		if(empty($values)) {
+			return;
+		}
+		
+		if( empty($values['ebod_apitoken_field']) || empty($values['ebod_webtoken_field']) ) {
 			return;
 		}
 
 		// Call API request to EBOD tracking system
-		$curl = curl_init(sprintf('%s/api/%s/beacon/%s', EBOD_BASE_URL, EBOD_API_VERSION, $website_token));
+		$curl = curl_init(sprintf('%s/api/%s/beacon/%s', EBOD_BASE_URL, EBOD_API_VERSION, $values['ebod_webtoken_field']));
 		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-			'Authorization: Bearer ' . $auth_token,
+			'Authorization: Bearer ' . $values['ebod_apitoken_field'],
 			'Content-Type: application/json'
 		));
 		curl_setopt($curl, CURLOPT_POST, 1);
@@ -178,7 +162,7 @@ class Ebod_Public {
 				$order->save_meta_data();
 				
 				// Call api to confirm the event
-				$this->confirm_event($website_token, $response, $auth_token);
+				$this->confirm_event($values['ebod_webtoken_field'], $response, $values['ebod_apitoken_field']);
 			} else {
 				error_log( json_encode($response) );
 			}

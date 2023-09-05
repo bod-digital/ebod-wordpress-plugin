@@ -156,9 +156,8 @@ class Ebod {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ebod_menu' );
-		$this->loader->add_action( 'admin_post_admin_ebod_form_submit', $plugin_admin, 'ebod_submit' );
-		$this->loader->add_action( 'admin_notices', $plugin_admin, 'ebod_admin_notice' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ebod_menu' );		
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'ebod_admin_settings_init' );
 	}
 
 	/**

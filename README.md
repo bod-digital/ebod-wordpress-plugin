@@ -19,9 +19,10 @@ This GitHub repository contains the source code for the EBOD WordPress plugin, w
 
 ![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/8598db53-19b9-4aba-ad32-35c80a4a89dd)
 
-4. Configure the plugin settings by navigating to `EBOD Tracking` in the WordPress admin menu.
+4. Configure the plugin in the `Settings` section by navigating to `EBOD Tracking` in the WordPress admin menu.
 
-![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/e15d7e64-f5c4-4419-a294-7be088c42df6)
+![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/fb996f21-c089-4b78-94af-d924ae97154a)
+
 
 
 ## Usage

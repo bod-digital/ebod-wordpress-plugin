@@ -34,8 +34,8 @@ This GitHub repository contains the source code for the EBOD WordPress plugin, w
 
 To configure the EBOD plugin, follow these steps:
 
-1. **API Credentials:** Obtain your API credentials by signing up on the [EBOD website](https://app.bod.digital).
-2. **Website Token:** Obtain tour Website token from app.bod.digital administration. 
+1. **API Credentials:** Obtain your API credentials by signing up on the [EBOD website](https://app.ebod.digital).
+2. **Website Token:** Obtain tour Website token from app.ebod.digital administration. 
 
 ## Contributing
 

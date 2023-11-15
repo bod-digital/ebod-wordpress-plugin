@@ -38,7 +38,7 @@ Key Features:
 == Frequently Asked Questions ==
 
 1. **How do I obtain API credentials for EBOD?**
-   You can obtain your API credentials by signing up on the [EBOD website](https://app.bod.digital).
+   You can obtain your API credentials by signing up on the [EBOD website](https://app.ebod.digital).
 
 2. **Can I customize the types of engagement and rewards offered to users?**
    Yes, you can tailor engagement options and reward types to suit your website's needs via the plugin settings.

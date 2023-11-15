@@ -151,7 +151,7 @@ function ebod_settings_section_callback() {
 	?>
 	<p>
 		Track easily the orders on your webpage and the user actions!<br>
-		Plugin info at <a href="https://app.bod.digital/merchant/login/" target="_blank">https://app.bod.digital/merchant/login/</a>.
+		Plugin info at <a href="https://app.ebod.digital/merchant/login/" target="_blank">https://app.ebod.digital/merchant/login/</a>.
 	</p>
 	<?php
 }
@@ -170,7 +170,7 @@ function ebod_apitoken_field_callback() {
         <div id="cn_app_id">
             <input type="text" name="ebod_settings[ebod_apitoken_field]" value="<?php echo isset( $setting['ebod_apitoken_field'] ) ? esc_attr( $setting['ebod_apitoken_field'] ) : ''; ?>">
 
-            <p class="description">Authorization token for authentication. You can find the token adminitration <a href="https://app.bod.digital/admin/tokens" target="_blank">here</a>.</p>
+            <p class="description">Authorization token for authentication. You can find the token adminitration <a href="https://app.ebod.digital/admin/tokens" target="_blank">here</a>.</p>
                 <p class="description" style="color:orange;">
                 <?php
 					if(isset($setting['ebod_timecreated_field'])) {
@@ -181,7 +181,7 @@ function ebod_apitoken_field_callback() {
 						echo 'Your token will expire in '.$remainingDays.' days. ';
 
 						if ($currentTimestamp >= ( $timestamp180DaysLater - (30 * 24 * 60 * 60) )) {
-							echo 'Please <a href="https://app.bod.digital/admin/tokens" target="_blank">generate a new token</a> before it expires!';
+							echo 'Please <a href="https://app.ebod.digital/admin/tokens" target="_blank">generate a new token</a> before it expires!';
 						}
 					}
                 ?>
@@ -200,7 +200,7 @@ function ebod_webtoken_field_callback() {
             <?php if(!is_woocommerce_activated()): ?>
                 <p class="description" style="color:red;">
                     Before setup EBOD tracking, please install and activate Woocommerce plugin first! 
-                </p> <a href="https://mamsikovneruky.sk/wp-admin/plugin-install.php?s=woocommerce&tab=search&type=term">Install woocommerce now</a>
+                </p> <a href="/wp-admin/plugin-install.php?s=woocommerce&tab=search&type=term">Install woocommerce now</a>
             <?php endif; ?>
         </div>
     </fieldset>

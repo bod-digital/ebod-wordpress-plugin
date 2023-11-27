@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly   
+
 /**
  * Provide a admin area view for the plugin
  *
@@ -27,7 +29,7 @@
 						<div class="cn-lead">
 							<p>Discover a Revolutionary Way to Earn Rewards and Enhance Your Experience with EBOD, Where Engagement Transforms into Benefits – Join Our Vibrant Community Today and Embrace a Future of Rewarding Interactions!</p>
 						</div>
-						<img src="//cns2-53eb.kxcdn.com/screen-dashboard-small.png">
+						<img src="https://ebod.digital/assets/images/all-img/hand-mocup.png">
 						<a href="https://app.ebod.digital/merchant/signup/" target="_blank" class="cn-btn cn-run-upgrade">Free Sign Up</a>
 						<br><br>
 						<a href="https://ebod.digital" target="_blank">read more about ebod <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -45,7 +47,7 @@
 				settings_fields( 'ebod' );
 				?>
                 <div class="card">
-                    <?php if(!is_woocommerce_activated()): ?>
+                    <?php if(!ebod_is_woocommerce_activated()): ?>
                     <div class="notice notice-error">
                         <p>
                         Woocommerce plugin is not installed and active!  <a href="/wp-admin/plugin-install.php?s=woocommerce&tab=search&type=term">Install woocommerce now</a>.

@@ -174,7 +174,7 @@ class Ebod {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-		if(is_woocommerce_activated()) {
+		if(ebod_is_woocommerce_activated()) {
 			$this->loader->add_action( 'woocommerce_order_status_completed', $plugin_public, 'ebod_order_completed' );
 		}
 	}

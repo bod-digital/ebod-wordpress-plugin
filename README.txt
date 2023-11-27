@@ -1,9 +1,11 @@
-=== Plugin Name ===
+=== EBOD Tracking ===
 Contributors: EBOD
-Tags: ebod, rewards, loyalty, engagement
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+Tags: ebod, rewards, loyalty, engagement, token
+Requires at least: 5.9
+Tested up to: 6.4
+Stable tag: 1.2.0
+Requires PHP: 7.4
+Requires PHP Architecture: 64 Bits
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +25,30 @@ Key Features:
 
 - **Enhanced User Experience:** Elevate your users' experience by offering tangible benefits for their engagement.
 
+== Screenshots ==
+
+[https://ebod.digital/assets/images/platform/image21.png EBOD merchant platform]
+
+
 == Installation ==
+
+= Minimum Requirements =
+
+* WordPress 5.9 or greater
+* WooCommerce 6.9 or greater
+* PHP version 7.4 or greater
+* PHP Architecture 64 bits
+* MySQL version 5.6 or greater
+
+= Automatic installation =
+
+Automatic installation is the easiest option as WordPress handles the file transfers itself and you don’t need to leave your web browser. To do an automatic install of this plugin, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
+	
+In the search field type “EBOD Tracking” and click Search Plugins. Once you’ve found this plugin you can view details about it such as the point release, rating and description. Most importantly of course, you can install it by simply clicking “Install Now”.
+	
+= Manual installation =
+
+The manual installation method involves downloading the plugin and uploading it to your webserver via your favourite FTP application. The WordPress codex contains [instructions on how to do this here](https://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
 1. Upload the `ebod` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
@@ -34,6 +59,14 @@ Key Features:
 1. Configure the EBOD plugin settings with your API credentials and other preferences.
 2. Use shortcodes or widgets to display EBOD engagement options on your website.
 3. Users will start earning rewards based on their interactions, as configured.
+
+= Where can I report bugs or contribute to the project? =
+
+Bugs should be reported in the [Google Listings and Ads GitHub repository](https://github.com/ebod-digital/ebod-wordpress-plugin).
+	
+= This is awesome! Can I contribute? =
+	
+Yes you can! Join in on our [GitHub repository](https://github.com/ebod-digital/ebod-wordpress-plugin :)
 
 == Frequently Asked Questions ==
 

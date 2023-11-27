@@ -159,7 +159,7 @@ function ebod_settings_section_callback() {
 function ebod_timecreated_field_callback() {
 	$setting = get_option('ebod_settings');
 	?>
-	<input type="hidden" name="ebod_settings[ebod_timecreated_field]" value="<?php echo isset( $setting['ebod_timecreated_field'] ) ? esc_attr( $setting['ebod_timecreated_field'] ) : time(); ?>">
+	<input type="hidden" name="ebod_settings[ebod_timecreated_field]" value="<?php echo esc_attr(isset( $setting['ebod_timecreated_field'] ) ?  $setting['ebod_timecreated_field']  : time()); ?>">
 	<?php
 }
 
@@ -168,7 +168,7 @@ function ebod_apitoken_field_callback() {
 	?>
     <fieldset>
         <div id="cn_app_id">
-            <input type="text" name="ebod_settings[ebod_apitoken_field]" value="<?php echo isset( $setting['ebod_apitoken_field'] ) ? esc_attr( $setting['ebod_apitoken_field'] ) : ''; ?>">
+            <input type="text" name="ebod_settings[ebod_apitoken_field]" value="<?php echo esc_attr(isset( $setting['ebod_apitoken_field'] ) ? $setting['ebod_apitoken_field'] : ''); ?>">
 
             <p class="description">Authorization token for authentication. You can find the token adminitration <a href="https://app.ebod.digital/admin/tokens" target="_blank">here</a>.</p>
                 <p class="description" style="color:orange;">
@@ -178,10 +178,10 @@ function ebod_apitoken_field_callback() {
 						$timestamp180DaysLater = $timestamp  + (EBOD_TOKEN_VALIDITY_DAYS * 24 * 60 * 60);
 						$remainingDays = floor(($timestamp180DaysLater - time()) / (24 * 60 * 60));
 
-						echo 'Your token will expire in '.$remainingDays.' days. ';
+						echo esc_attr('Your token will expire in '.$remainingDays.' days. ');
 
 						if ($currentTimestamp >= ( $timestamp180DaysLater - (30 * 24 * 60 * 60) )) {
-							echo 'Please <a href="https://app.ebod.digital/admin/tokens" target="_blank">generate a new token</a> before it expires!';
+							echo esc_attr('Please <a href="https://app.ebod.digital/admin/tokens" target="_blank">generate a new token</a> before it expires!');
 						}
 					}
                 ?>
@@ -196,8 +196,8 @@ function ebod_webtoken_field_callback() {
 	?>
 	<fieldset>
         <div id="cn_app_id">
-			<input type="text" name="ebod_settings[ebod_webtoken_field]" value="<?php echo isset( $setting['ebod_webtoken_field'] ) ? esc_attr( $setting['ebod_webtoken_field'] ) : ''; ?>">                                            <p class="description">This steps is an essential prerequisite for identifying your customers and tracking their orders.</p>
-            <?php if(!is_woocommerce_activated()): ?>
+			<input type="text" name="ebod_settings[ebod_webtoken_field]" value="<?php echo esc_attr(isset( $setting['ebod_webtoken_field'] ) ?  $setting['ebod_webtoken_field'] : ''); ?>">                                            <p class="description">This steps is an essential prerequisite for identifying your customers and tracking their orders.</p>
+            <?php if(!ebod_is_woocommerce_activated()): ?>
                 <p class="description" style="color:red;">
                     Before setup EBOD tracking, please install and activate Woocommerce plugin first! 
                 </p> <a href="/wp-admin/plugin-install.php?s=woocommerce&tab=search&type=term">Install woocommerce now</a>

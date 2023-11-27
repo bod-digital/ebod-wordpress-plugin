@@ -132,40 +132,39 @@ class Ebod_Public {
 		}
 
 		// Call API request to EBOD tracking system
-		$curl = curl_init(sprintf('%s/api/%s/beacon/%s', EBOD_BASE_URL, EBOD_API_VERSION, $values['ebod_webtoken_field']));
-		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-			'Authorization: Bearer ' . $values['ebod_apitoken_field'],
-			'Content-Type: application/json'
-		));
-		curl_setopt($curl, CURLOPT_POST, 1);
-		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 1);
-  		curl_setopt($curl, CURLOPT_TIMEOUT, 5);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode(array(
-			"event" => "ebod_purchase",
-			"externalId" => $order_id,
-			"email" => $user_email,
-			"totalPrice" => $order_total,
-			"currency" => $order_currency
-		)));
-		$curl_response = curl_exec($curl);
-		curl_close($curl);
+		$args = [
+			'method' => 'POST',
+			'timeout' => 5,
+			'headers' => [
+				'Authorization: Bearer ' . $values['ebod_apitoken_field'],
+				'Content-Type: application/json'
+			],
+			'body' => json_encode([
+				"event" => "ebod_purchase",
+				"externalId" => $order_id,
+				"email" => $user_email,
+				"totalPrice" => $order_total,
+				"currency" => $order_currency
+			])
+		];
 
-		if ($curl_response === false) {
-			$error = curl_error($curl);
-			error_log($error);
-		} else {
-			$response = json_decode($curl_response, true);
-			if(!empty($response['data']['id'])) {
+		$url = sprintf('%s/api/%s/beacon/%s', EBOD_BASE_URL, EBOD_API_VERSION, $values['ebod_webtoken_field']);
+		$response = wp_remote_request($url, $args);
+
+		if ($response && $response['body']) {
+			$data = json_decode($response['body'], true);
+			if(!empty($data['data']['id'])) {
 				// Save the event id to order meta
-				$order->update_meta_data('ebod_event_id', $response['data']['id']);
+				$order->update_meta_data('ebod_event_id', $data['data']['id']);
 				$order->save_meta_data();
 				
 				// Call api to confirm the event
-				$this->confirm_event($values['ebod_webtoken_field'], $response, $values['ebod_apitoken_field']);
+				$this->confirm_event($values['ebod_webtoken_field'], $data, $values['ebod_apitoken_field']);
 			} else {
-				error_log( json_encode($response) );
+				error_log( json_encode($data) );
 			}
+		} else {
+			error_log( json_encode($response) );
 		}
 	}
 
@@ -177,20 +176,21 @@ class Ebod_Public {
 	 * @param string $auth_token
 	 */
 	private function confirm_event($website_token, $response, $auth_token) {
-		$curl = curl_init(sprintf('%s/api/%s/beacon/%s/%s', EBOD_BASE_URL, EBOD_API_VERSION, $website_token, $response['data']['id']));
-		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-			'Authorization: Bearer ' . $auth_token,
-			'Content-Type: application/json'
-		));
-		curl_setopt($curl, CURLOPT_POST, 1);
-		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 1);
-  		curl_setopt($curl, CURLOPT_TIMEOUT, 5);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode(array(
-			"event" => "ebod_purchase_confirm"
-		)));
-		$curl_response = curl_exec($curl);				
-		curl_close($curl);
+
+		$args = [
+			'method' => 'POST',
+			'timeout' => 5,
+			'headers' => [
+				'Authorization: Bearer ' . $auth_token,
+				'Content-Type: application/json'
+			],
+			'body' => json_encode([
+				"event" => "ebod_purchase_confirm"
+			])
+		];
+
+		$url = sprintf('%s/api/%s/beacon/%s/%s', EBOD_BASE_URL, EBOD_API_VERSION, $website_token, $response['data']['id']);
+		wp_remote_request($url, $args);
 	}
 
 }

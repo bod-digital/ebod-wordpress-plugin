@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.2 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EBOD_VERSION', '1.1.0' );
+define( 'EBOD_VERSION', '1.2.0' );
 define( 'EBOD_API_VERSION', 'v1' );
 define( 'EBOD_TOKEN_VALIDITY_DAYS', '180' );
 define( 'EBOD_BASE_URL', 'https://e.bod.digital' );
@@ -43,8 +43,8 @@ define( 'EBOD_BASE_URL', 'https://e.bod.digital' );
 /**
  * Check if WooCommerce is activated
  */
-if ( ! function_exists( 'is_woocommerce_activated' ) ) {
-    function is_woocommerce_activated() {
+if ( ! function_exists( 'ebod_is_woocommerce_activated' ) ) {
+    function ebod_is_woocommerce_activated() {
         //if ( class_exists( 'woocommerce' ) ) { 
         if( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')) ) ) {
 			return true; 
@@ -58,7 +58,7 @@ if ( ! function_exists( 'is_woocommerce_activated' ) ) {
  * The code that runs during plugin activation.
  * This action is documented in includes/class-ebod-activator.php
  */
-function activate_ebod() {
+function ebod_activate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ebod-activator.php';
 	Ebod_Activator::activate();
 }
@@ -67,13 +67,13 @@ function activate_ebod() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-ebod-deactivator.php
  */
-function deactivate_ebod() {
+function ebod_deactivate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ebod-deactivator.php';
 	Ebod_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_ebod' );
-register_deactivation_hook( __FILE__, 'deactivate_ebod' );
+register_activation_hook( __FILE__, 'ebod_activate' );
+register_deactivation_hook( __FILE__, 'ebod_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -90,8 +90,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-ebod.php';
  *
  * @since    1.0.0
  */
-function run_ebod() {
+function ebod_run() {
 	$plugin = new Ebod();
 	$plugin->run();
 }
-run_ebod();
+ebod_run();

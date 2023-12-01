@@ -7,6 +7,12 @@ This GitHub repository contains the source code for the EBOD WordPress plugin, w
 
 ## Installation
 
+Official plugin installation:
+
+[https://wordpress.org/plugins/ebod-tracking/](https://wordpress.org/plugins/ebod-tracking/)
+
+--- or ---
+
 1. Download the latest release `ebod.zip` file from the [Releases](https://github.com/bod-digital/ebod-wordpress-plugin/releases/latest) page.
 
 ![obrázok](https://github.com/bod-digital/ebod-wordpress-plugin/assets/142394627/ebfad928-2aeb-44d5-9b90-a58efc027965)

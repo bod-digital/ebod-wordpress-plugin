@@ -16,7 +16,7 @@
  * Plugin Name:       EBOD Tracking
  * Plugin URI:        https://github.com/bod-digital/ebod-wordpress-plugin
  * Description:       EBOD Tracking for WooCommerce orders.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            ebodbot
  * Author URI:        https://bod.digital
  * License:           GPL-2.0+

@@ -25,6 +25,25 @@ Key Features:
 
 - **Enhanced User Experience:** Elevate your users' experience by offering tangible benefits for their engagement.
 
+Plugin Disclaimer: Relying on EBOD.digital Service:
+
+- Our plugin is designed to deliver enhanced functionality by integrating seamlessly with the EBOD.digital service. This integration ensures a feature-rich experience, optimized performance, and ongoing support for our users.
+
+- It's crucial to acknowledge that, in regular circumstances, this reliance on EBOD.digital guarantees the plugin's efficiency and effectiveness. Our team actively collaborates with EBOD.digital to maintain a seamless integration and provide a positive user experience.
+
+- However, in the unlikely event of disruptions or changes to the EBOD.digital service, there might be temporary impacts on the plugin's performance. We are committed to swiftly addressing any issues that may arise and keeping our users informed throughout the process.
+
+- We value your trust in our plugin and appreciate your understanding of the collaborative nature of our service EBOD.digital. Should you have any questions or concerns, our support team is here to assist you promptly. Thank you for choosing our plugin and being part of our user community.
+
+Link to EBOD.digital Service:
+https://ebod.digital
+
+Link to EBOD.digital Service Terms of Use:
+https://app.ebod.digital/merchant/toc
+
+Link to EBOD.digital Service Privacy Policy:
+https://app.ebod.digital/merchant/toc#privacy-policy
+
 == Screenshots ==
 
 [https://ebod.digital/assets/images/platform/image21.png EBOD merchant platform]
